@@ -18,8 +18,27 @@ const bookSchema = new mongoose.Schema({
         required : [true,'Please add a price.']
     } ,
     userMail : {
+        type : String,
+        trim : true
+    },
+    userMailContact : {
+        type : String,
+        required : [true,'Please add an email.'],
+        trim  : true
+    },
+    name :{
+        type : String,
+        required : [true,'Please add an name.'],
+        trim  : true
+    },
+    phone :{
+        type : String,
+        trim  : true
+    },
+    mediaUrl :{
         type : String
     }
+
 })
 
 mongoose.models = {}
