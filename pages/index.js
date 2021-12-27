@@ -25,7 +25,9 @@ export default function Home() {
 
 
   console.log(config.HOST)
-    const res = await fetch(`${config.HOST}/api/books/`);
+   // const res = await fetch(`${config.HOST}/api/books/`);
+    const res = await fetch(`/api/books/`);
+
     const {data} = await res.json();
     
     setBooks(data);
