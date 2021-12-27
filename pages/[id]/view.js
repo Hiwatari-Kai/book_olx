@@ -1,40 +1,69 @@
-
+import Link from 'next/link';
+import {Button} from 'react-bootstrap';
+import {getSession} from 'next-auth/react';
+import Image from 'next/image'
 
 const View = ({data}) => {
     return (
-        <div className="grid  grid-cols-2 mt-5">
-            <div className="p-5 shadow-lg ">
-                <div className="text-center">
-                    <h1 className="text-2xl font-bold">Book's Details</h1>
-                </div>
-                <div className= "flex flex-col">
-                    <p className ="text-lg text-blue-900 font-bold">{data.title}</p>
-                    <p className="text-sm font-semibold italic">{data.author}</p>
-                    <p className="text-lg font-semibold"><span>&#8377;</span>{data.price}</p>
-                    <div className="flex justify-center">
-                    {
-                        data.mediaUrl ? <img className="w-3/4" src={data.mediaUrl}/> : null
-                    }
+        <div className="relative bg-black">
+            <div className="h-2 bg-searchGreen"></div>
+            <div className="h-80 bg-detailsImage bg-cover">
+                <Link href="/">
+                    <Button variant="outline-light" className="m-4">Go Back</Button>
+                </Link>
+            </div>
+            <div className=" mr-16 ml-16 bg-gray-800 rounded-2xl relative bottom-20">
+                <div className="flex p-16">
+                
+                    <div className="flex relative">
+                        <div className="rounded-2xl w-80 h-80 flex justify-content-center">
+                            <img src={data.mediaUrl}  className='rounded-lg w-80 h-80 opacity-50 object-cover'></img>
+                        </div>
+                       <div className="absolute left-8 w-64 h-80 cursor-pointer">
+                        <a href={data.mediaUrl} target="_blank" rel="noopener noreferrer">
+                            <img src={data.mediaUrl}  className='rounded-lg h-80 w-64 object-cover'></img>
+                        </a>
+                        </div>
+                        <div className="flex flex-col justify-content-center ml-14">
+                            <p className='text-white text-3xl font-poppins mb-2 w-72 break-words'>{data.title}</p>
+                            <p className='text-sm font-poppins text-searchGreen mb-2 w-72 break-words'>Author: {data.author}</p>
+                            <p className="text-3xl font-poppins text-white mb-4">Rs {data.price}/-</p>
+                            <div className="flex space-x-3"> 
+                                <img src="/StaticImages/detailsIconGreen.png" className='h-10 w-7'/> 
+                                <img src="/StaticImages/detailsIconBlue.png" className='h-10 w-7'/>
+                                <img src="/StaticImages/detailsIconRed.png" className='h-10 w-7'/>
+                            </div>
+                             
+                        </div>
                         
+                    </div>
+                    <div className="ml-52">
+                        <p className="text-3xl text-white font-poppins mb-4">Seller's Details</p>
+                        <p className='text-gray-200 font-poppins text-md mb-2'><span className="font-semibold ">Name : </span> {data.name}</p>
+                        {data.phone &&   <p className='text-gray-200 font-poppins text-md mb-2'><span className="font-semibold ">Mobile No :</span> {data.phone}</p>}
+                        <p className='text-gray-200 font-poppins text-md mb-4'><span className="font-semibold text-white">Email :</span> {data.mail}</p>
+                        <p className="w-72 text-gray-300 text-md break-words">
+                            {data.description}
+                        </p>
                     </div>
                 </div>
             </div>
-        
-            <div className="p-5 shadow-lg ">
-                <div className="text-center">
-                    <h1 className="text-2xl font-bold">Seller's Details</h1>
-                </div>
-                <div className= "flex flex-col">
-                    <p className ="text-lg text-blue-900 font-bold">{data.name}</p>
-                    <p className="text-sm font-semibold italic">{data.phone}</p>
-                    <p className="text-lg font-semibold">{data.userMailContact}</p>
-                </div>
-            </div>
+            
         </div>
     )
 }
-export async function getServerSideProps({query : {id}}) {
-    const res = await fetch(`http://localhost:3000/api/books/${id}`);
+export async function getServerSideProps(context) {
+    const session = await getSession(context);
+    if(!session)
+    {
+        return {
+            redirect: {
+            destination: '/signIn',
+            permanent: false,
+            },
+        }
+    }
+    const res = await fetch(`http://localhost:3000/api/books/${context.query.id}`);
     const {data} = await res.json();
     return (
       { props: { data } });

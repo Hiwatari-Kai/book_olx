@@ -2,7 +2,7 @@ import BookForm from "../components/BookForm"
 
 const book_input = () => {
     return (
-        <div>
+        <div className="bg-gray-50">
             <BookForm/>
         </div>
     )
