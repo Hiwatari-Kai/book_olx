@@ -21,6 +21,8 @@ export default function Home() {
 
  const handleAll = async ()=>{
   console.log(process.env.ENVN)
+  console.log(process.env.HOST)
+
 
   console.log(config.HOST)
     const res = await fetch(`${config.HOST}/api/books/`);
