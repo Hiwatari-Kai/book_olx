@@ -1,6 +1,6 @@
 import BookForm from "../components/BookForm"
 
-const book_input = () => {
+const Book_input = () => {
     return (
         <div className="bg-gray-50">
             <BookForm/>
@@ -8,5 +8,5 @@ const book_input = () => {
     )
 }
 
-export default book_input
+export default Book_input
 

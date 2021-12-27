@@ -2,7 +2,7 @@ import {useSession} from 'next-auth/react';
 import { useRouter } from 'next/router';
 
 
-const signIn = () => {
+const SignIn = () => {
     const router = useRouter();
     const {data : session} = useSession();
     if(session)
@@ -22,4 +22,4 @@ const signIn = () => {
     )
 }
 
-export default signIn
+export default SignIn
