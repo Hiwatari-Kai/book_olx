@@ -1,9 +1,16 @@
 import connectDB from '../../../utils/dbConnect';
 import Book from '../../../models/Book';
 import router from 'next/router';
+import NextCors from 'nextjs-cors';
 
 
 const handler = async (req, res) => {
+    await NextCors(req, res, {
+        // Options
+        methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+        origin: '*',
+        optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+     });
     
     const {method} = req;
     const term = `${req.query.term}`;
