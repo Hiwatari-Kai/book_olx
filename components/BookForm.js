@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import {Alert,Button} from 'react-bootstrap'
 import Link from 'next/link';
 
-const bookForm = () => {
+const BookForm = () => {
     const router = useRouter();
     const {data :session} = useSession();
     const { register, handleSubmit,formState: {errors}} = useForm();
@@ -140,4 +140,4 @@ const bookForm = () => {
     )
 }
 
-export default bookForm
+export default BookForm

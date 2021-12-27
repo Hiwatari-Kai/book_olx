@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import {Button} from 'react-bootstrap';
 import NotFound from '../components/NotFound';
 import Image from 'next/image';
-const profile = ({data}) => {
+const Profile = ({data}) => {
 
     const stringShort = (x)=>{
         if(x.length<=21)
@@ -83,4 +83,4 @@ export async function getServerSideProps(context) {
 
 
 
-export default profile
+export default Profile
