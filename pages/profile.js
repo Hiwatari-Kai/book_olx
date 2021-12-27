@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import {Button} from 'react-bootstrap';
 import NotFound from '../components/NotFound';
 import Image from 'next/image';
+import config from '../config';
 const Profile = ({data}) => {
 
     const stringShort = (x)=>{
@@ -14,7 +15,7 @@ const Profile = ({data}) => {
 
     const router = useRouter();
     const handleDelete = async(id)=>{
-        const res = await fetch(`http://localhost:3000/api/books/${id}`, {
+        const res = await fetch(`${config.HOST}/api/books/${id}`, {
             method: 'DELETE',
           });
         router.push('/profile');
@@ -75,7 +76,7 @@ export async function getServerSideProps(context) {
         }
     }
   
-    const res = await fetch(`http://localhost:3000/api/books/profile?userMail=${session.user.email}`);
+    const res = await fetch(`${config.HOST}/api/books/profile?userMail=${session.user.email}`);
    
     const {data} = await res.json()
     return { props: { data } }

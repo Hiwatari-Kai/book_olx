@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useForm } from "react-hook-form";
 import {Alert,Button} from 'react-bootstrap'
 import Link from 'next/link';
+import config from '../config';
 
 const BookForm = () => {
     const router = useRouter();
@@ -15,7 +16,7 @@ const BookForm = () => {
         const mediaUrl = await imageUpload();
         const uploadData = {...formData,mediaUrl : mediaUrl,userMail : session.user.email};
         
-        const res = await fetch('http://localhost:3000/api/books/', {
+        const res = await fetch(`${config.HOST}/api/books/`, {
             body: JSON.stringify(uploadData),
             headers: {
               'Content-Type': 'application/json',

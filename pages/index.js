@@ -3,7 +3,9 @@ import BookList from "../components/BookList"
 import {useSession} from 'next-auth/react';
 import {useState ,useEffect} from 'react';
 import { Button } from 'react-bootstrap';
-import Image from 'next/image'
+import Image from 'next/image';
+import config from '../config';
+
 
 export default function Home() {
   const {data : session} = useSession();
@@ -18,14 +20,18 @@ export default function Home() {
   }, [term])
 
  const handleAll = async ()=>{
-    const res = await fetch('http://localhost:3000/api/books/');
+  console.log(process.env.ENVN)
+
+  console.log(config.HOST)
+    const res = await fetch(`${config.HOST}/api/books/`);
     const {data} = await res.json();
+    
     setBooks(data);
   }
   
 
   const handleSearch = async()=>{
-    const res = await fetch(`http://localhost:3000/api/books/search?term=${term}`);
+    const res = await fetch(`${config.HOST}/api/books/search?term=${term}`);
     const {data} = await res.json();
     setBooks(data);
   }

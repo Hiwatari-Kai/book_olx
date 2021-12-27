@@ -2,6 +2,7 @@ import Link from 'next/link';
 import {Button} from 'react-bootstrap';
 import {getSession} from 'next-auth/react';
 import Image from 'next/image'
+import config from '../../config';
 
 const View = ({data}) => {
     return (
@@ -63,7 +64,7 @@ export async function getServerSideProps(context) {
             },
         }
     }
-    const res = await fetch(`http://localhost:3000/api/books/${context.query.id}`);
+    const res = await fetch(`${config.HOST}/api/books/${context.query.id}`);
     const {data} = await res.json();
     return (
       { props: { data } });

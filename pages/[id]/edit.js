@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { Alert ,Button} from 'react-bootstrap';
+import config from '../../config';
 const Edit = ({data}) => {
 
     const router = useRouter();
@@ -10,7 +11,7 @@ const Edit = ({data}) => {
         const editedData = {...formData};
        
         
-        const res = await fetch(`http://localhost:3000/api/books/${router.query.id}`, {
+        const res = await fetch(`${config.HOST}/api/books/${router.query.id}`, {
             body: JSON.stringify(editedData),
             headers: {
               'Content-Type': 'application/json'
@@ -112,7 +113,7 @@ const Edit = ({data}) => {
 }
 
 export async function getServerSideProps({query : {id}}) {
-    const res = await fetch(`http://localhost:3000/api/books/${id}`);
+    const res = await fetch(`${config.HOST}/api/books/${id}`);
     const {data} = await res.json();
     return (
       { props: { data } });
