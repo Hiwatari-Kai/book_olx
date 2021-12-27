@@ -5,5 +5,6 @@ module.exports = {
   },
   env: {
     ENVN: 'prod',
+    HOST: 'https://grimoire-one.vercel.app',
   },
 }
