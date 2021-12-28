@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import {useSession} from 'next-auth/react'
 import { useState } from 'react';
 import { useForm } from "react-hook-form";
-import {Alert,Button} from 'react-bootstrap'
+import {Alert,Button,Spinner} from 'react-bootstrap'
 import Link from 'next/link';
 import config from '../config';
 
@@ -11,8 +11,10 @@ const BookForm = () => {
     const {data :session} = useSession();
     const { register, handleSubmit,formState: {errors}} = useForm();
     const [media,setMedia] = useState("");
+    const [loading,setLoading] = useState(false);
     
     const onSubmit = async(formData)=>{
+        setLoading(true);
         const mediaUrl = await imageUpload();
         const uploadData = {...formData,mediaUrl : mediaUrl,userMail : session.user.email};
         
@@ -133,7 +135,15 @@ const BookForm = () => {
                             </div>
                             
                         <div className="flex justify-center mt-7">    
-                            <Button type="submit" variant="dark" className="  rounded-lg text-white text-lg ">Submit</Button> 
+                            <Button type="submit" variant="dark" className="  rounded-lg text-white text-lg flex justift-content-center align-items-center space-x-2">
+                                {loading && <Spinner
+                                    as="span"
+                                    animation="border"
+                                    size="sm"
+                                    role="status"
+                                    aria-hidden="true"/>}
+                                     {loading ? <p>Submitting..</p>: <p>Submit</p>}
+                            </Button> 
                         </div>
                     </form>
                 </div>
