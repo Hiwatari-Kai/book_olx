@@ -1,6 +1,6 @@
 import connectDB from '../../utils/dbConnect';
 import Book from '../../models/Book';
-export default async (req, res) => {
+const handler = async (req, res) => {
     const { method } = req;
   
     // This will allow OPTIONS request
