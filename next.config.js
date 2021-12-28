@@ -4,7 +4,7 @@ module.exports = {
     domains: ['res.cloudinary.com'],
   },
   env: {
-    ENVN: 'prod',
+    ENVN: 'dev',
     HOST: 'https://grimoire-one.vercel.app',
   },
 }
