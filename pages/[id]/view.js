@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import {Button} from 'react-bootstrap';
 import {getSession} from 'next-auth/react';
-import Image from 'next/image'
 import config from '../../config';
+import Image from 'next/image';
 
 const View = ({data}) => {
     return (
@@ -17,13 +17,13 @@ const View = ({data}) => {
                 <div className="flex p-16">
                 
                     <div className="flex relative">
-                        <div className="rounded-2xl w-80 h-80 flex justify-content-center">
-                            <img src={data.mediaUrl}  className='rounded-lg w-80 h-80 opacity-50 object-cover'></img>
+                        <div className="rounded-2xl w-80 h-80 flex justify-content-center relative">
+                            <Image alt="Book Image" src={data.mediaUrl} layout="fill" className='rounded-lg opacity-50 object-cover'></Image>
                         </div>
                        <div className="absolute left-8 w-64 h-80 cursor-pointer">
-                        <a href={data.mediaUrl} target="_blank" rel="noopener noreferrer">
-                            <img src={data.mediaUrl}  className='rounded-lg h-80 w-64 object-cover'></img>
-                        </a>
+                            <a href={data.mediaUrl} target="_blank" rel="noopener noreferrer">
+                                <Image alt="Book Image" src={data.mediaUrl}  layout="fill" className='rounded-lg object-cover'></Image>
+                            </a>
                         </div>
                         <div className="flex flex-col justify-content-center ml-14">
                             <p className='text-white text-3xl font-poppins mb-2 w-72 break-words'>{data.title}</p>

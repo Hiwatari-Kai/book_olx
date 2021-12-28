@@ -12,7 +12,7 @@ function Header() {
     return (
         <div className=" bg-black flex place-content-end pt-3 pb-3 pl-20 pr-20">
             <Link href = "/" >
-                <p className="cursor-pointer text-4xl text-white font-bold mr-auto">Grimoire</p>
+                <p className="  cursor-pointer text-4xl text-white font-bold mr-auto">Grimoire</p>
             </Link>
              {session && 
                 <div className="flex space-x-4 ">

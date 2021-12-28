@@ -1,4 +1,5 @@
 import '../styles/globals.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import 'tailwindcss/tailwind.css'
 import { SessionProvider } from "next-auth/react"
 import Layout from '../components/Layout';

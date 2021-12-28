@@ -15,7 +15,7 @@ const SignIn = () => {
             <div className="flex flex-col space-y-10 align-items-center p-10 rounded-2xl">
                 <p className="text-4xl text-bold text-gray-500 font-poppins">Please Sign in to know seller's details.</p>
                 
-                <img src="/StaticImages/signInImage.png" className="ml-10 w-96 h-96"/>
+                <img src="/StaticImages/signInImageS.svg" className="ml-10 w-96 h-96"/>
             </div>
             
         </div>

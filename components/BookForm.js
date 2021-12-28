@@ -16,7 +16,7 @@ const BookForm = () => {
         const mediaUrl = await imageUpload();
         const uploadData = {...formData,mediaUrl : mediaUrl,userMail : session.user.email};
         
-        const res = await fetch(`${config.HOST}/api/books/`, {
+        const res = await fetch(`${config.HOST}/api/books`, {
             body: JSON.stringify(uploadData),
             headers: {
               'Content-Type': 'application/json',
@@ -124,6 +124,7 @@ const BookForm = () => {
                             <div className = "flex flex-col mb-2">     
                                 <label className="mb-1"><p className='text-sm'>Upload a photo of the book</p></label>
                                 <input {...register("photo",{required : true})} className="bg-white p-1 border-gray-300 border-2 rounded-lg" name="media" type="file" accept="image/*" onChange={(e)=>setMedia(e.target.files[0])}/>
+                                
                                 {errors?.photo && 
                                     <Alert className="pt-1 pb-1 pl-3 pr-3" variant='danger'>
                                         {errors.photo?.type==='required' && <p className="text-sm">A photo is required.</p>}

@@ -2,7 +2,7 @@ import Link from "next/link";
 import BookList from "../components/BookList"
 import {useSession} from 'next-auth/react';
 import {useState ,useEffect} from 'react';
-import { Button } from 'react-bootstrap';
+import { Button ,Spinner} from 'react-bootstrap';
 import Image from 'next/image';
 import config from '../config';
 
@@ -11,6 +11,7 @@ export default function Home() {
   const {data : session} = useSession();
   const [ books,setBooks] = useState([]);
   const [term,setTerm] = useState("");
+  const [loading,setLoading] = useState(true);
 
   useEffect(() => {
     if(term===""){
@@ -20,23 +21,19 @@ export default function Home() {
   }, [term])
 
  const handleAll = async ()=>{
-  console.log(process.env.ENVN)
-  console.log(process.env.HOST)
-
-
-  console.log(config.HOST)
    // const res = await fetch(`${config.HOST}/api/books/`);
     const res = await fetch(`/api/books/`);
-
     const {data} = await res.json();
-    
+    setLoading(false);
     setBooks(data);
   }
   
 
   const handleSearch = async()=>{
+    setLoading(true);
     const res = await fetch(`${config.HOST}/api/books/search?term=${term}`);
     const {data} = await res.json();
+    setLoading(false);
     setBooks(data);
   }
   
@@ -57,21 +54,19 @@ export default function Home() {
           <div className="h-80 w-1/2 bg-gradient-to-r from-black via-searchGreen p-8">
           </div>
           
-          <Image src = "/StaticImages/bg-image.png" layout="fill" className="opacity-40" />
+          <Image src = "/StaticImages/bg-imageS.png" layout="fill" className="opacity-40" />
         </div>
         <div className="flex pl-24 pr-24 pt-10">
           <p className="text-3xl font-poppins font-extrabold">Choose Your Books!</p>
           <div className="ml-auto">
-          {session && 
-              <Link href= "/book_input" >
-                  <Button size="lg" className="border-0 rounded-lg text-white text-lg bg-searchGreen hover:bg-black "><p className="font-poppins font-semibold">+ Add</p></Button>
-              </Link>
-          }
+            <Link href= "/book_input" >
+                    <Button size="lg" className="border-0 rounded-lg text-white text-lg bg-searchGreen hover:bg-black "><p className="font-poppins font-semibold">+ Add</p></Button>
+            </Link>
           </div>
         
         </div>
       
-      <BookList data={books}/>
+      {loading ? <div className="h-64 flex justify-content-center align-items-center"><Spinner  animation="border" /></div> : <BookList data={books}/>}
     </div>
       
   )

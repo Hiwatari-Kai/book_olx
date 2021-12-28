@@ -1,6 +1,5 @@
 import connectDB from '../../../utils/dbConnect';
 import Book from '../../../models/Book';
-import router from 'next/router';
 import NextCors from 'nextjs-cors';
 
 

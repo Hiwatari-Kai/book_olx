@@ -5,6 +5,7 @@ import {Button} from 'react-bootstrap';
 import NotFound from '../components/NotFound';
 import Image from 'next/image';
 import config from '../config';
+
 const Profile = ({data}) => {
 
     const stringShort = (x)=>{
@@ -24,7 +25,7 @@ const Profile = ({data}) => {
         <div>
             <div className="h-80 relative ">
                 <div className="h-80 w-1/2 bg-gradient-to-r from-black via-searchGreen"></div>
-                <Image src = "/StaticImages/bg-image2.png" layout="fill" className="opacity-70" />
+                <Image src = "/StaticImages/bg-image2S.png" layout="fill" className="opacity-70" />
                 
             </div>
             
@@ -40,6 +41,8 @@ const Profile = ({data}) => {
                             return (
                                 <div key = {book._id} className="">
                                     <div className="bg-cardImage w-52 h-60 cursor-pointer bg-cover bg-searchGreen opacity-90 rounded-3xl flex flex-col justify-content-end">
+                                        <img className="w-12 h-12 mb-11 ml-6 opacity-70" src="/StaticImages/cardIcon.svg"/>
+
                                         <div className= "flex flex-col h-32 rounded-3xl bg-gradient-to-t from-black pl-6 pt-1">
                                             <p className ="text-lg font-roboto text-white font-bold">{stringShort(book.title)}</p>
                                             <p className="text-xs font-roboto text-gray-300 font-semibold">{stringShort(book.author)}</p>
