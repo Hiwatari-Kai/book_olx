@@ -16,7 +16,7 @@ const Book_input = () => {
         const mediaUrl = await imageUpload();
         const uploadData = {...formData,mediaUrl : mediaUrl,userMail : session.user.email};
         
-        const res = await fetch(`${config.HOST}/api`, {
+        const res = await fetch(`${config.HOST}/api/books`, {
             body: JSON.stringify(uploadData),
             headers: {
               'Content-Type': 'application/json',
