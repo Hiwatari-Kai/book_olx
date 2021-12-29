@@ -16,7 +16,7 @@ const View = ({data}) => {
             <div className=" mr-16 ml-16 bg-gray-800 rounded-2xl relative bottom-20 pl-10 pr-10 pb-16 pt-16">
                 <div className="grid xl:grid-cols-2 lg:grid-cols-1 md:gap-10">
                 
-                    <div className="grid grid-cols-2 ">
+                    <div className="grid md:grid-cols-2 sm:grid-cols-1 gap-4 ">
                         <div className="relative">
                             <div className="rounded-2xl w-72 h-80 flex justify-content-center relative">
                                 <Image alt="Book Image" src={data.mediaUrl} layout="fill" className='rounded-lg opacity-50 object-cover'></Image>
@@ -40,7 +40,7 @@ const View = ({data}) => {
                         </div>
                         
                     </div>
-                    <div className="flex justify-center">
+                    <div className="flex md:justify-center">
                         <div>
                             <p className="text-3xl text-white font-poppins mb-4">Seller's Details</p>
                             <p className='text-gray-200 font-poppins text-md mb-2'><span className="font-semibold ">Name : </span> {data.name}</p>
