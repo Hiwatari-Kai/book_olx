@@ -18,17 +18,16 @@ const View = ({data}) => {
                 
                     <div className="grid grid-cols-2 ">
                         <div className="relative">
-                            <div className="rounded-2xl w-80 h-80 flex justify-content-center relative">
+                            <div className="rounded-2xl w-72 h-80 flex justify-content-center relative">
                                 <Image alt="Book Image" src={data.mediaUrl} layout="fill" className='rounded-lg opacity-50 object-cover'></Image>
                             </div>
-                            <div className="absolute w-64 h-80 top-0 left-8 cursor-pointer">
+                            <div className="absolute w-60 h-80 top-0 left-6 cursor-pointer">
                                 <a href={data.mediaUrl} target="_blank" rel="noopener noreferrer">
                                     <Image alt="Book Image" src={data.mediaUrl}  layout="fill" className='rounded-lg object-cover'></Image>
                                 </a>
                             </div>
                         </div>
-                        <div className="flex justify-center">
-                            <div className="flex flex-col justify-content-center">
+                        <div className="flex flex-col justify-content-center ml-12">
                                 <p className='text-white text-3xl font-poppins mb-2 break-words'>{data.title}</p>
                                 <p className='text-sm font-poppins text-searchGreen mb-2 break-words'>Author: {data.author}</p>
                                 <p className="text-3xl font-poppins text-white mb-4">Rs {data.price}/-</p>
@@ -37,8 +36,7 @@ const View = ({data}) => {
                                     <img src="/StaticImages/detailsIconBlue.png" className='h-10 w-7'/>
                                     <img src="/StaticImages/detailsIconRed.png" className='h-10 w-7'/>
                                 </div>
-                                
-                            </div>
+                             
                         </div>
                         
                     </div>
