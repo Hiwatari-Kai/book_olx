@@ -1,17 +1,23 @@
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
-import { Alert ,Button} from 'react-bootstrap';
+import { Alert ,Button,Spinner} from 'react-bootstrap';
 import config from '../../config';
+import { withPageAuthRequired } from '@auth0/nextjs-auth0';
+import { useState } from 'react';
+
 const Edit = ({data}) => {
 
     const router = useRouter();
+    const [loading,setLoading] = useState(false);
     const { register, handleSubmit ,formState: {errors}} = useForm();
+
     const onSubmit = async(formData)=>{
+        setLoading(true);
         const editedData = {...formData};
        
         
-        const res = await fetch(`${config.HOST}/api/books/${router.query.id}`, {
+        const res = await fetch(`/api/books/${router.query.id}`, {
             body: JSON.stringify(editedData),
             headers: {
               'Content-Type': 'application/json'
@@ -103,7 +109,15 @@ const Edit = ({data}) => {
                         </div>
                         
                     <div className="flex justify-center mt-7">    
-                        <Button type="submit" variant="dark" className=" rounded-lg text-white text-lg ">Submit</Button> 
+                        <Button type="submit" variant="dark" className="  rounded-lg text-white text-lg flex justift-content-center align-items-center space-x-2">
+                                    {loading && <Spinner
+                                        as="span"
+                                        animation="border"
+                                        size="sm"
+                                        role="status"
+                                        aria-hidden="true"/>}
+                                        {loading ? <p>Submitting..</p>: <p>Submit</p>}
+                        </Button> 
                     </div>
                 </form>
             </div>
@@ -111,11 +125,14 @@ const Edit = ({data}) => {
     </div>
     )
 }
+export const getServerSideProps = withPageAuthRequired({
+    async getServerSideProps({query : {id}}) {
+        const res = await fetch(`${config.HOST}/api/books/${id}`);
+        const {data} = await res.json();
+        return (
+            { props: { data } }
+            );
+    }
+});
 
-export async function getServerSideProps({query : {id}}) {
-    const res = await fetch(`${config.HOST}/api/books/${id}`);
-    const {data} = await res.json();
-    return (
-      { props: { data } });
-  }
 export default Edit

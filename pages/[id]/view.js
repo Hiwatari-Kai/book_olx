@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import {Button} from 'react-bootstrap';
-import {getSession} from 'next-auth/react';
+import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import config from '../../config';
 import Image from 'next/image';
 
@@ -57,20 +57,15 @@ const View = ({data}) => {
         </div>
     )
 }
-export async function getServerSideProps(context) {
-    const session = await getSession(context);
-    if(!session)
-    {
-        return {
-            redirect: {
-            destination: '/signIn',
-            permanent: false,
-            },
-        }
+
+export const getServerSideProps = withPageAuthRequired({
+    async getServerSideProps(ctx) {
+      
+        const res = await fetch(`${config.HOST}/api/books/${ctx.query.id}`);
+        const {data} = await res.json();
+        return (
+        { props: { data } });
     }
-    const res = await fetch(`${config.HOST}/api/books/${context.query.id}`);
-    const {data} = await res.json();
-    return (
-      { props: { data } });
-  }
+  });
+
 export default View

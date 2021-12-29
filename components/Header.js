@@ -1,25 +1,24 @@
-import Link from "next/link"
-import { useSession, signIn, signOut } from "next-auth/react"
+import Link from "next/link";
+import { useUser } from '@auth0/nextjs-auth0';
 import {Button,Dropdown} from 'react-bootstrap'
 
 
 
 function Header() {
 
-    const { data: session } = useSession()
-
+    const { user, error, isLoading } = useUser();
    
     return (
         <div className=" bg-black flex place-content-end pt-3 pb-3 pl-20 pr-20">
             <Link href = "/" >
                 <p className="  cursor-pointer text-4xl text-white font-bold mr-auto">Grimoire</p>
             </Link>
-             {session && 
+             {user && 
                 <div className="flex space-x-4 ">
                     
                     <Dropdown>
                         <Dropdown.Toggle variant="light" id="dropdown-basic" className="p-1">
-                            <img className="rounded-full inline cursor-pointer h-9 w-9" src = {session.user.image}/>
+                            <img className="rounded-full inline cursor-pointer h-9 w-9" src = {user.picture}/>
                         </Dropdown.Toggle>
                         
                         <Dropdown.Menu>
@@ -29,13 +28,18 @@ function Header() {
                         </Dropdown.Menu>
                         
                     </Dropdown>
-                    
-                    <Button variant="light" size="sm" className="mr-auto" onClick={()=>signOut()}>Sign out</Button>   
+                    <div className="flex">
+                        <a href="/api/auth/logout">
+                            <Button variant="light" size="sm" className="mr-auto h-full">Sign out</Button>   
+                        </a>
+                    </div>
                 </div>
              }
-             {!session && 
+             {!user && 
                 <div className= "flex">
-                    <Button variant="light" size="sm" className="mr-auto" onClick={() => signIn("google")}>Sign in</Button>
+                    <a href="/api/auth/login">
+                        <Button variant="light" size="sm" className="mr-auto h-full">Sign in</Button>
+                    </a>
                 </div>
              }
         </div>

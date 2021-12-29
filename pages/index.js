@@ -1,6 +1,5 @@
 import Link from "next/link";
-import BookList from "../components/BookList"
-import {useSession} from 'next-auth/react';
+import BookList from "../components/BookList";
 import {useState ,useEffect} from 'react';
 import { Button ,Spinner} from 'react-bootstrap';
 import Image from 'next/image';
@@ -8,7 +7,7 @@ import config from '../config';
 
 
 export default function Home() {
-  const {data : session} = useSession();
+  
   const [ books,setBooks] = useState([]);
   const [term,setTerm] = useState("");
   const [loading,setLoading] = useState(true);

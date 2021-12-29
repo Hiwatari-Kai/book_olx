@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { getSession} from 'next-auth/react';
+import { withPageAuthRequired,getSession } from '@auth0/nextjs-auth0';
 import { useRouter } from 'next/router';
 import {Button} from 'react-bootstrap';
 import NotFound from '../components/NotFound';
@@ -16,7 +16,7 @@ const Profile = ({data}) => {
 
     const router = useRouter();
     const handleDelete = async(id)=>{
-        const res = await fetch(`${config.HOST}/api/books/${id}`, {
+        const res = await fetch(`/api/books/${id}`, {
             method: 'DELETE',
           });
         router.push('/profile');
@@ -65,26 +65,18 @@ const Profile = ({data}) => {
     </div>
     )
 }
-
-export async function getServerSideProps(context) {
-    
-    const session = await getSession(context);
-    if(!session)
-    {
-        return {
-            redirect: {
-            destination: '/',
-            permanent: false,
-            },
-        }
-    }
-  
-    const res = await fetch(`${config.HOST}/api/books/profile?userMail=${session.user.email}`);
+export const getServerSideProps = withPageAuthRequired({
+    async getServerSideProps(ctx) {
+     
+      const session = getSession(ctx.req, ctx.res);
+      const res = await fetch(`${config.HOST}/api/books/profile?userMail=${session.user.email}`);
    
     const {data} = await res.json()
-    return { props: { data } }
-  }
-
-
+    return (
+            { props: { data} }
+            );
+    }
+  });
+  
 
 export default Profile

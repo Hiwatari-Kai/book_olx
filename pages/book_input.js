@@ -1,5 +1,5 @@
 import BookForm from "../components/BookForm";
-import {getSession} from 'next-auth/react';
+import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 
 const Book_input = () => {
     return(
@@ -8,20 +8,8 @@ const Book_input = () => {
         </div>
     )
 }
-export async function getServerSideProps(context) {
-    const session = await getSession(context);
-    if(!session)
-    {
-        return {
-            redirect: {
-            destination: '/signIn',
-            permanent: false,
-            },
-        }
-    }
-    return (
-      { props: {} });
-  }
+
+export const getServerSideProps = withPageAuthRequired();
 
 export default Book_input
 

@@ -1,14 +1,14 @@
 import { useRouter } from 'next/router';
-import {useSession} from 'next-auth/react'
+import { useUser } from '@auth0/nextjs-auth0';
 import { useState } from 'react';
 import { useForm } from "react-hook-form";
 import {Alert,Button,Spinner} from 'react-bootstrap'
 import Link from 'next/link';
-import config from '../config';
+
 
 const BookForm = () => {
     const router = useRouter();
-    const {data :session} = useSession();
+    const { user} = useUser();
     const { register, handleSubmit,formState: {errors}} = useForm();
     const [media,setMedia] = useState("");
     const [loading,setLoading] = useState(false);
@@ -16,9 +16,9 @@ const BookForm = () => {
     const onSubmit = async(formData)=>{
         setLoading(true);
         const mediaUrl = await imageUpload();
-        const uploadData = {...formData,mediaUrl : mediaUrl,userMail : session.user.email};
+        const uploadData = {...formData,mediaUrl : mediaUrl,userMail : user.email};
         
-        const res = await fetch(`${config.HOST}/api/books`, {
+        const res = await fetch(`/api/books`, {
             body: JSON.stringify(uploadData),
             headers: {
               'Content-Type': 'application/json',

@@ -1,16 +1,16 @@
-import '../styles/globals.css'
+import '../styles/globals.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'tailwindcss/tailwind.css'
-import { SessionProvider } from "next-auth/react"
+import 'tailwindcss/tailwind.css';
+import { UserProvider } from '@auth0/nextjs-auth0';
 import Layout from '../components/Layout';
 
-function MyApp({ Component,  pageProps: { session, ...pageProps },}) {
+function MyApp({ Component,  pageProps}) {
   return(
-  <SessionProvider session={session}>
-  <Layout>
-    <Component {...pageProps} />
-  </Layout>
-  </SessionProvider> 
+  <UserProvider >
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
+  </UserProvider> 
   )
   
 }
