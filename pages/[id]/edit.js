@@ -25,7 +25,7 @@ const Edit = ({data}) => {
 
     return (
     <div className='bg-gray-50 pb-5'>
-        <Link href="/">
+        <Link href="/profile">
             <Button variant="outline-dark" className="ml-10 mt-5">Go Back</Button>
         </Link>
         <div className="flex justify-center " >

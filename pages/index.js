@@ -60,7 +60,7 @@ export default function Home() {
           <p className="text-3xl font-poppins font-extrabold">Choose Your Books!</p>
           <div className="ml-auto">
             <Link href= "/book_input" >
-                    <Button size="lg" className="border-0 rounded-lg text-white text-lg bg-searchGreen hover:bg-black "><p className="font-poppins font-semibold">+ Add</p></Button>
+                    <Button size="lg" variant="success" className="border-0 rounded-lg text-white text-lg bg-searchGreen hover:bg-black "><p className="font-poppins font-semibold">+ Add</p></Button>
             </Link>
           </div>
         

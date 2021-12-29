@@ -13,7 +13,7 @@ const BookList =  ({data}) => {
     return (
         <div className="pl-20 pr-20 pt-4 pb-5">
             {data.length===0 && <NotFound message="No books are available currently. Come back latter."></NotFound>}
-            <div className = "grid grid-cols-5 gap-5 p-3">
+            <div className = "grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-5 p-3">
                 {
                     
                     data.map((book)=>{

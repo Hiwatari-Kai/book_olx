@@ -9,9 +9,9 @@ import config from '../config';
 const Profile = ({data}) => {
 
     const stringShort = (x)=>{
-        if(x.length<=21)
+        if(x.length<=16)
             return x;
-        return x.substr(0,19) + "..";
+        return x.substr(0,14) + "..";
     }
 
     const router = useRouter();
@@ -35,7 +35,7 @@ const Profile = ({data}) => {
                 </Link>
                
                 {data.length===0 && <NotFound message="You haven't listed any books."></NotFound>}
-                <div className = "grid grid-cols-5 gap-5 p-3">
+                <div className = "grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-5 p-3">
                         {
                             data.map((book)=>{
                             return (
