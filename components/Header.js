@@ -29,17 +29,17 @@ function Header() {
                         
                     </Dropdown>
                     <div className="flex">
-                        <a href="/api/auth/logout">
+                        <Link href="/api/auth/logout">
                             <Button variant="light" size="sm" className="mr-auto h-full">Sign out</Button>   
-                        </a>
+                        </Link>
                     </div>
                 </div>
              }
              {!user && 
                 <div className= "flex">
-                    <a href="/api/auth/login">
+                    <Link href="/api/auth/login">
                         <Button variant="light" size="sm" className="mr-auto h-full">Sign in</Button>
-                    </a>
+                    </Link>
                 </div>
              }
         </div>
