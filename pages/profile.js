@@ -35,7 +35,7 @@ const Profile = ({data}) => {
                 </Link>
                
                 {data.length===0 && <NotFound message="You haven't listed any books."></NotFound>}
-                <div className = "grid lg:grid-cols-5 md:grid-cols-3 sm:grid-cols-2 gap-5 p-3">
+                <div className = "grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-5 p-3">
                         {
                             data.map((book)=>{
                             return (
