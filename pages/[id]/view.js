@@ -14,7 +14,7 @@ const View = ({data}) => {
                 </Link>
             </div>
             <div className=" mr-16 ml-16 bg-gray-800 rounded-2xl relative bottom-20 pl-10 pr-10 pb-16 pt-16">
-                <div className="grid lg:grid-cols-2 md:grid-cols-1 md:gap-10">
+                <div className="grid xl:grid-cols-2 lg:grid-cols-1 md:gap-10">
                 
                     <div className="grid grid-cols-2 ">
                         <div className="relative">
